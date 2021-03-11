@@ -1,6 +1,8 @@
 package com.epsilon.training.programs;
 
+
 import java.util.InputMismatchException;
+import java.util.List;
 
 import com.epsilon.training.dao.DaoException;
 import com.epsilon.training.dao.DaoFactory;
@@ -15,7 +17,6 @@ public class ProductManagerApplication {
 	ProductDao dao;
 
 	void start() throws DaoException {
-		// tight coupling; must be avoided - Use a factory method (Virtual constructor)
 		dao = DaoFactory.getProductDao();
 
 		while (true) {
@@ -40,7 +41,17 @@ public class ProductManagerApplication {
 				case 4:
 					deleteProduct();
 					break;
-				case 5: dao.getAll();
+				case 5: 
+					getAllProduct();
+					break;
+				case 6: 
+					getProductbyPriceRange();
+					break;
+				case 7:
+					getProductbyBrand();
+					break;
+				case 8:
+					getProductbyCateogory();
 					break;
 				
 				default:
@@ -53,10 +64,64 @@ public class ProductManagerApplication {
 		}
 	}
 	
+	private void getProductbyCateogory() {
+		try {
+			String cateogory = KeyboardUtil.getString("Enter product category");
+			dao.getByCategory(cateogory);
+		} catch (DaoException e) {
+			
+			log.warn("there was an error retriving the products: ");
+			log.warn(e.getMessage());
+		}
+	}
+
+	private void getProductbyBrand() {
+		try {
+			String brand = KeyboardUtil.getString("Enter the brand: ");
+			List<Product> list =	dao.getByBrand(brand);
+			for(Product p: list) {
+				log.debug("{}", p);
+			}
+		} catch (DaoException e) {
+			log.warn("there was an error retriving the products :");
+			log.warn(e.getMessage());
+		}
+	}
+
+	private void getProductbyPriceRange() {
+		try {
+			double min = KeyboardUtil.getDouble("Enter min price: ");
+			double max = KeyboardUtil.getDouble("Enter max price: ");
+			List<Product> list =	dao.getByPriceRange(min, max);
+			for(Product p: list) {
+				log.debug("{}", p);
+			}
+		} catch (DaoException e) {
+			log.warn("there was an error retriving the product :");
+			log.warn(e.getMessage());
+		}
+		
+	}
+
+	private void getAllProduct() {
+		try {
+			List<Product> list = dao.getAll();
+			for(Product p: list) {
+				log.debug("{}", p);
+			}
+		} catch (DaoException e) {
+			log.warn("there was an error retriving the product :");
+			log.warn(e.getMessage());
+
+		}
+		
+		
+	}
+
 	private void deleteProduct() {
 		try {
 			int id = KeyboardUtil.getInt("Enter the product id to be deleted: ");
-			dao.getProduct(id);
+			dao.deleteProduct(id);
 		} catch (DaoException e) {
 			log.warn("there was an error retriving the product :");
 			log.warn(e.getMessage());
@@ -168,6 +233,10 @@ public class ProductManagerApplication {
 		System.out.println("2. Retrieve a product by id");
 		System.out.println("3. Modify details of a product");
 		System.out.println("4. Remove product details");
+		System.out.println("5. Get all products");
+		System.out.println("6. Get Product by price range");
+		System.out.println("7. Get Product by Brand");
+		System.out.println("8. Get Product by Cateogory");
 	}
 
 	public static void main(String[] args) throws DaoException {

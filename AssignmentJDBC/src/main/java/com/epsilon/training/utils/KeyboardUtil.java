@@ -23,4 +23,10 @@ public class KeyboardUtil {
 		Scanner sc = new Scanner(System.in);
 		return sc.nextLine();
 	}
+
+	public static double getDouble(String msg) {
+		System.out.print(msg);
+		Scanner sc = new Scanner(System.in);
+		return sc.nextDouble();
+	}
 }

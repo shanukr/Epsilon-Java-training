@@ -136,17 +136,37 @@ public class JdbcProductDao implements ProductDao {
 
 	@Override
 	public List<Product> getByPriceRange(double min, double max) throws DaoException {
-		return null;
+		List<Product> p = populateList();
+		List<Product> l = populateList();
+		for(int i=0;i<p.size();i++) {
+			if(min<p.get(i).getUnitPrice() && max>p.get(i).getUnitPrice()) {
+				l.add(p.get(i));
+			}
+		}
+		return l;
+		
 	}
 
 	@Override
 	public List<Product> getByBrand(String brand) throws DaoException {
-		return null;
+		List<Product> p = populateList();
+		List<Product> l = populateList();
+		for(int i=0;i<p.size();i++) {
+			if(brand.equals(p.get(i).getBrand()) ) {
+				l.add(p.get(i));
+			}
+		} return l;
 	}
 
 	@Override
 	public List<Product> getByCategory(String category) throws DaoException {
-		return null;
+		List<Product> p = populateList();
+		List<Product> l = populateList();
+		for(int i=0;i<p.size();i++) {
+			if(category.equals(p.get(i).getBrand()) ) {
+				l.add(p.get(i));
+			}
+		} return l;
 	}
 
 }
