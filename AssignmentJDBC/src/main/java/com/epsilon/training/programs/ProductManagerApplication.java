@@ -67,7 +67,10 @@ public class ProductManagerApplication {
 	private void getProductbyCateogory() {
 		try {
 			String cateogory = KeyboardUtil.getString("Enter product category");
-			dao.getByCategory(cateogory);
+			List<Product> list =dao.getByCategory(cateogory);
+			for(Product p: list) {
+				log.debug("{}", p);
+			}
 		} catch (DaoException e) {
 			
 			log.warn("there was an error retriving the products: ");
