@@ -205,9 +205,9 @@ public class ProductManagerApplication {
 			String brand = KeyboardUtil.getString("Enter product brand: ");
 			String category = KeyboardUtil.getString("Enter product category: ");
 			String qunatityPerUnit = KeyboardUtil.getString("Enter quantity per unit: ");
-			Double unitPrice = (double) KeyboardUtil.getInt("Enter per unit price: ");
-			Double discount = (double) KeyboardUtil.getInt("Enter discount: ");
-			
+			Double unitPrice = KeyboardUtil.getDouble("Enter per unit price: ");
+			Double discount = KeyboardUtil.getDouble("Enter discount: ");
+			String picture = KeyboardUtil.getString("enter picture :");
 			Product p = new Product();
 			p.setId(id);
 			p.setName(name);
@@ -217,6 +217,7 @@ public class ProductManagerApplication {
 			p.setQuantityPerUnit(qunatityPerUnit);
 			p.setUnitPrice(unitPrice);
 			p.setDiscount(discount);
+			p.setPicture(picture);
 			
 			dao.addProduct(p);
 			System.out.println("New product added sucessfully");

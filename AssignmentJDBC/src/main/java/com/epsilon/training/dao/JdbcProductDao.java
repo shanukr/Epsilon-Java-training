@@ -163,7 +163,7 @@ public class JdbcProductDao implements ProductDao {
 		List<Product> p = populateList();
 		List<Product> l = populateList();
 		for(int i=0;i<p.size();i++) {
-			if(category.equals(p.get(i).getBrand()) ) {
+			if(category.equals(p.get(i).getCategory()) ) {
 				l.add(p.get(i));
 			}
 		} return l;
