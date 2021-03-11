@@ -184,7 +184,8 @@ public class ProductManagerApplication {
 		
 		try {
 			int id = KeyboardUtil.getInt("Enter Product id to retrieve: ");
-			return dao.getProduct(id);
+			Product p= dao.getProduct(id);
+			log.debug("product = {}",p);
 		} catch (DaoException e) {
 			log.warn("there was an error retriving the product :");
 			log.warn(e.getMessage());
